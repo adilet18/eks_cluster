@@ -1,10 +1,10 @@
 module "s3" {
-  source      = "./state-bucket"
+  source      = "./s3"
   common_tags = var.common_tags
 }
 
 module "eks" {
-  source      = "./terraform-eks-ci-cd"
+  source      = "./eks"
   my_ip       = "158.181.157.142/32"
   common_tags = var.common_tags
 }
