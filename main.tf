@@ -9,6 +9,8 @@ module "eks" {
   common_tags = var.common_tags
 }
 
+
+
 module "rds" {
   source                  = "./rds"
   subnet_ids              = module.eks.public_subnet_ids

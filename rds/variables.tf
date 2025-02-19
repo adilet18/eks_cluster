@@ -32,7 +32,7 @@ variable "vpc_id" {}
 variable "subnet_ids" {}
 
 variable "my_ip" {
-  default = "158.181.157.142/32"
+  default = "212.42.127.54/32"
 }
 
 variable "vpc_cidr" {

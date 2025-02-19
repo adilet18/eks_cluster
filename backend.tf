@@ -10,3 +10,15 @@ provider "helm" {
     cluster_ca_certificate = base64decode(module.eks.eks_certificate_authority)
   }
 }
+
+
+
+
+terraform {
+  required_providers {
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "~> 1.14.0" # Use latest stable version
+    }
+  }
+}
