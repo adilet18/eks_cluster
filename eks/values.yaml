@@ -1,44 +1,59 @@
 # Enable Prometheus components
-prometheus:
-  enabled: true
-  service:
-    type: LoadBalancer
-    annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
-  persistence:
-    enabled: false
-  
+# prometheus:
+#   enabled: true
+#   service:
+#     type: LoadBalancer
+#     annotations:
+#     service.beta.kubernetes.io/aws-load-balancer-type: "elb"
+#   persistence:
+#     enabled: false
 
-# Alertmanager settings
-alertmanager:
-  enabled: true
-  service:
-    type: ClusterIP
-  config:
-    global:
-      resolve_timeout: 5m
-    route:
-      receiver: "default"
-      group_by: ["alertname", "severity"]
-      group_wait: 10s
-      group_interval: 10s
-      repeat_interval: 1h
-    receivers:
-      - name: "default"
-        email_configs:
-          - to: "markibaevadilet2@gmail.com"
-            from: "alertmanager@gmail.com"
-            auth_username: "user"
-            auth_password: "password"
+prometheus:
+  # Enable Prometheus Server Ingress
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"  # Use the NGINX Ingress controller
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - "prometheus.example.com"  # Change this to your actual domain for Prometheus
+    paths:
+      - "/"  # The root path
+    tls:
+      - secretName: prometheus-tls  # Optional: If you have TLS configured
+        hosts:
+          - "prometheus.example.com"  # The TLS domain
 
 # Grafana settings
+# grafana:
+#   enabled: true
+#   service:
+#     type: LoadBalancer
+#   adminPassword: "admin123"
+#   persistence:
+#     enabled: false
+
 grafana:
-  enabled: true
-  service:
-    type: LoadBalancer
-  adminPassword: "admin123"
-  persistence:
-    enabled: false
+  # Enable Grafana Ingress
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"  # Use the NGINX Ingress controller
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - "grafana.471112992927.realhandsonlabs.net"  # Change this to your actual domain for Grafana
+    paths:
+      - "/"  # The root path
+    tls:
+      - secretName: grafana-tls  # Optional: If you have TLS configured
+        hosts:
+          - "grafana.471112992927.realhandsonlabs.net"  
 
 # Enable Node Exporter
 prometheus-node-exporter:

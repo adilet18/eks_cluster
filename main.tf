@@ -5,7 +5,7 @@ module "s3" {
 
 module "eks" {
   source      = "./eks"
-  my_ip       = "158.181.157.142/32"
+  my_ip       = "212.42.127.114/32"
   common_tags = var.common_tags
 }
 

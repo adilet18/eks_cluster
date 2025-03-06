@@ -104,9 +104,9 @@ resource "kubectl_manifest" "tls_certificate" {
       issuerRef:
         name: letsencrypt-prod
         kind: ClusterIssuer
-      commonName: 767397887597.realhandsonlabs.net 
+      commonName: 471112992927.realhandsonlabs.net 
       dnsNames:
-      - 767397887597.realhandsonlabs.net
+      - 471112992927.realhandsonlabs.net
   YAML
   depends_on = [kubectl_manifest.letsencrypt_issuer]
 }

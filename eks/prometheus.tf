@@ -62,4 +62,21 @@ resource "helm_release" "prometheus" {
 }
 
 
+resource "aws_security_group_rule" "allow_prometheus" {
+  type              = "ingress"
+  from_port         = 9090
+  to_port           = 9090
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.worker_group_mgmt.id
+}
+
+resource "aws_security_group_rule" "allow_grafana" {
+  type              = "ingress"
+  from_port         = 3000
+  to_port           = 3000
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.worker_group_mgmt.id
+}
 
