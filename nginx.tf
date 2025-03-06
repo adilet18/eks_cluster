@@ -23,7 +23,7 @@ controller:
       cpu: 500m
       memory: 512Mi
   metrics:
-    enabled: false
+    enabled: true
     serviceMonitor:
       enabled: true
 EOT
@@ -104,10 +104,12 @@ resource "kubectl_manifest" "tls_certificate" {
       issuerRef:
         name: letsencrypt-prod
         kind: ClusterIssuer
-      commonName: 533267208345.realhandsonlabs.net 
+      commonName: 767397887597.realhandsonlabs.net 
       dnsNames:
-      - 533267208345.realhandsonlabs.net 
+      - 767397887597.realhandsonlabs.net
   YAML
   depends_on = [kubectl_manifest.letsencrypt_issuer]
 }
+
+
 
